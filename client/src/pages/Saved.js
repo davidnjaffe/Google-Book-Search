@@ -57,49 +57,37 @@ function Saved() {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                onChange={handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                onChange={handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                onChange={handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(formObject.author && formObject.title)}
-                onClick={handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>My Saved Books</h1>
             </Jumbotron>
             {books.length ? (
               <List>
                 {books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                    
+                    <ListItem key={book._id}>
+
+
+                     <Row>
+                       <Col size="md-2">
+                       <img src={book.image} />
+                       </Col>
+                      
+                      
+                      <Col size="md-10">
                       <strong>
-                        {book.title} by {book.author}
+                        {book.title} by {book.authors}
                       </strong>
-                    </Link>
+                    
+                    <p>{book.description}</p>
+                    <a href={book.link} target="_blank" >Buy Now</a>
                     <DeleteBtn onClick={() => deleteBook(book._id)} />
-                  </ListItem>
+                    </Col>
+
+                    </Row>
+                </ListItem>
+                
+                  
                 ))}
               </List>
             ) : (
