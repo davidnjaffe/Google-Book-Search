@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 
 function Nav() {
@@ -7,7 +8,7 @@ function Nav() {
       <a className="navbar-brand" href="/">
         Google Book Search
       </a>
-      <a className="navbar-brand" href="/search">
+      <a className="navbar-brand" href="/">
         Search
       </a>
       <a className="navbar-brand" href="/saved">

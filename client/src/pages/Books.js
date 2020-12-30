@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
@@ -57,9 +57,9 @@ function Books() {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>Search the Library</h1>
             </Jumbotron>
             <form>
               <Input
@@ -67,44 +67,54 @@ function Books() {
                 name="title"
                 placeholder="Title (required)"
               />
-              <Input
-                onChange={handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                onChange={handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
+             
+              
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
                 onClick={handleFormSubmit}
               >
-                Submit Book
+                SEARCH
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+          </Row>
+          <Row>
+          <Col size="md-12 sm-12">
+            
+              <h3>Search Results</h3>
+            
             {books.length ? (
               <List>
                 {books.map(book => (
                   <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => deleteBook(book._id)} />
-                  </ListItem>
+
+
+                  <Row>
+                    <Col size="md-2">
+                    <img src={book.image} />
+                    </Col>
+                   <Col size="md-10">
+                   <strong>
+                     {book.title} by {book.authors}
+                   </strong>
+                 <p>{book.description}</p>
+                 <p><a href={book.link} target="_blank" >Buy Now</a></p>
+                 <a>SAVE BOOK</a>
+                 <DeleteBtn onClick={() => deleteBook(book._id)} />
+                 </Col>
+                 </Row>
+             </ListItem>
                 ))}
               </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            <br></br>
+            <br></br>
           </Col>
         </Row>
       </Container>
